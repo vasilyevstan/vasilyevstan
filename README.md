@@ -2,13 +2,13 @@
 
 **Engineering leader · platform engineering · AI-assisted development**
 
-I'm a Principal Software Engineering Manager at Microsoft, leading a globally
-distributed platform-engineering team. My 25+ years span software, product and
-people leadership, including teams across three countries and engineering leadership
-during a company's growth from 20 to 200+ people. I co-founded Agile Estonia.
+I lead engineering teams, with experience across product delivery, cloud platforms
+and reliability. I enjoy helping engineers and leaders develop, and supporting
+teams through growth and change. Clarity, trust and continuous learning guide my
+approach. I've also taught at university and helped establish Agile Estonia.
 
-I also build personal projects with AI coding tools. I remain responsible for
-design decisions, review and verification.
+I stay hands-on. These personal projects show how I use AI-assisted engineering
+with clear ownership, explicit tradeoffs and evidence that a change works.
 
 _Personal projects; opinions are my own._ · [LinkedIn](https://www.linkedin.com/in/stanvasilyev/)
 

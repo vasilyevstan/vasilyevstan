@@ -155,13 +155,13 @@ between a suggestion and a physical action more precise.
 
 Zombies in da House provides a more immediate picture of the change:
 
-| Setup: Lastlight House | Gameplay: Zombies in da House |
+| Early prototype: Lastlight House | Later landing page: Zombies in da House |
 | --- | --- |
-| ![Early setup screen with a sparse tiled house and simple characters](../assets/zombies-early-prototype.png) | ![Later gameplay with furnished rooms, a forest setting, detailed characters and turn controls](../assets/zombies-later-gameplay.png) |
+| ![Early setup screen with a sparse tiled house and simple characters](../assets/zombies-early-prototype.png) | ![Zombies in da House landing page showing the cabin, game modes and play options](../assets/zombies-in-da-house.png) |
 
-_Author-supplied setup and gameplay screenshots, showing different game states.
-Capture dates and exact code revisions are unknown. The setup screen includes
-an error banner._
+_Author-supplied screenshots: an early setup screen and the later game's landing
+page. Capture dates and exact code revisions are unknown. The setup screen
+includes an error banner._
 
 The [recorded development milestones](../projects/zombies-in-da-house-edge-multiplayer.md#recorded-development-milestones)
 run from the first browser implementation on 6 November to v19 on 14 November

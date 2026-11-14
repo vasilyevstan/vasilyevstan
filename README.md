@@ -34,9 +34,12 @@ Evidence: [failure isolation](https://github.com/vasilyevstan/LiveTrafficStan/bl
 
 An event-driven sports-betting **simulation**: no real money and no real match feeds.
 
-It combines a React client and TypeScript services. It handles duplicate
-messages and recovers after service restarts, while keeping visual layouts separate
-from the rules that decide bets.
+I started BetStan in 2023 to learn TypeScript and build microservices. Within two
+months, a working version was running on DigitalOcean. Then I put it on the shelf.
+
+In 2026 I brought it back as a place to practise AI-assisted engineering and
+multi-agent development. The productivity gain has been enormous in my own work,
+but useful results depend on clear tasks, good context and careful verification.
 
 [Live demo](https://betstan.xyz) · [Repository](https://github.com/vasilyevstan/betstan) ·
 [AI-assisted engineering case study](articles/ai-assisted-engineering-betstan.md)
@@ -67,24 +70,29 @@ enabled locally, and each change is checked by reading the value back.
 
 | Catanastan                                                                                        | Zombies in da House                                                                                                         |
 | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| [![Catanastan public landing page](assets/catanastan.png)](https://catanastan.syntal.workers.dev) | [![Zombies in da House public landing page](assets/zombies-in-da-house.png)](https://zombie-in-da-house.syntal.workers.dev) |
+| [![Catanastan public landing page](assets/catanastan.png)](https://catanastan.syntal.workers.dev) | [![Zombies in da House gameplay, supplied by the author](assets/zombies-later-gameplay.png)](https://zombie-in-da-house.syntal.workers.dev) |
 
 Two multiplayer browser games hosted on Cloudflare Workers and Durable Objects.
 The server controls game state, and the same rules run locally and online. Both
 support reconnects, retries and accessible 3D interaction.
 
-- **Catanastan:** [Live demo](https://catanastan.syntal.workers.dev) · [Public summary](https://gist.github.com/vasilyevstan/658d4cf81b92f5478c3d900e2954fefd). Independent game, not an official CATAN product.
+- **Catanastan:** [Live demo](https://catanastan.syntal.workers.dev) · [Public summary](https://gist.github.com/vasilyevstan/658d4cf81b92f5478c3d900e2954fefd).
 - **Zombies in da House:** [Live demo](https://zombie-in-da-house.syntal.workers.dev) · [Public summary](https://gist.github.com/vasilyevstan/a3061770fe84c1e7a48b7fa2847537f5).
 
-Both source repositories remain private; screenshots show their public landing pages.
+Zombies in da House's recorded code milestones run from the first playable
+implementation on 6 November to v19 on 14 November 2026.
+[See the prototype-to-game comparison](projects/zombies-in-da-house-edge-multiplayer.md#how-it-evolved).
+
+Both source repositories remain private. Images show Catanastan's public landing
+page and an author-supplied Zombies in da House gameplay capture.
 
 ## Writing
 
-[AI-assisted engineering in BetStan: a compatibility case study](articles/ai-assisted-engineering-betstan.md)
+[BetStan: from learning TypeScript to AI-assisted engineering](articles/ai-assisted-engineering-betstan.md)
 
-A market-layout editor looked like a visual change, but older service versions
-could still write the same records. The design had to preserve compatibility.
-The case study covers the fix, regression tests and the tradeoff we accepted.
+From a learning project in 2023 to an AI experimentation platform in 2026.
+The story includes a compatibility problem, the review that caught it, and what
+it taught me about using agents effectively.
 
 ## How I ship
 

@@ -1,4 +1,4 @@
-# AI-assisted engineering in BetStan: a compatibility case study
+# BetStan: from learning TypeScript to AI-assisted engineering
 
 _Stan Vasilyev · personal project; opinions are my own._
 
@@ -9,10 +9,32 @@ build hands-on with AI coding agents. It has scheduled football events, compress
 live matches, pre-match and live betting, moderation and settlement, but
 [no real-money bets or real match feeds](https://github.com/vasilyevstan/betstan/blob/eeb60e6ebec34945b16de734c3361d00fcbc300b/README.md#L3-L7).
 
-This is the story of one small feature and the design decision inside it that
-mattered. The interesting question is not how quickly an agent can generate a
-visual editor. It is how to keep that apparently cosmetic change from altering
-the contracts on which the rest of the system depends.
+## 2023: learning by building
+
+I started BetStan in 2023 to learn TypeScript and build microservices. Within two
+months, I had a working version running on DigitalOcean. Then I put the project
+on the shelf.
+
+## 2026: a second life
+
+In 2026 I returned to it with a new purpose: a place to practise AI-assisted
+engineering on a codebase with real dependencies, state and deployment concerns.
+That includes multi-agent development: deciding which work can run independently,
+giving agents context, and bringing their contributions back together.
+
+The repository contains [reusable specialist agents](https://github.com/vasilyevstan/betstan/blob/e3c2edc7e6dc76bd4b36d690696e25f68625bd16/.github/agents/README.md#L13-L29)
+for backend, frontend, testing and other tasks. An [optional coordinator](https://github.com/vasilyevstan/betstan/blob/e3c2edc7e6dc76bd4b36d690696e25f68625bd16/.github/agents/betstan-delivery-coordinator.agent.md#L9-L28)
+can delegate bounded work, but one owner remains responsible for the result.
+These are development workflows, not AI agents making betting decisions.
+
+In my own work, the productivity gain has been enormous. That is my experience,
+not a measured speedup. Turning that capacity into reliable software still means
+setting scope, sharing context, checking output and avoiding unnecessary handoffs.
+More agents are not automatically better.
+
+The compatibility case below is one example from that second phase. A visual
+editor was the brief; preserving compatibility with older services was the less
+obvious engineering problem.
 
 ## The invariant: presentation never decides bet validity
 
@@ -119,8 +141,8 @@ Two regression tests exercise the compatibility claim:
 PR #1057 also records service tests and eight synthetic-browser journeys.
 Those are **historical PR-reported results**, not tests rerun for this article.
 The PR explicitly makes no production-availability claim. The sources establish
-an AI-assisted workflow, but do not establish which particular model found the
-defect or a measured productivity improvement.
+an AI-assisted workflow, but do not identify which particular model found the
+defect.
 
 ## What transfers to other teams
 

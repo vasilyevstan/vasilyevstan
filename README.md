@@ -88,6 +88,12 @@ page and an author-supplied Zombies in da House gameplay capture.
 
 ## Writing
 
+[What I learned building with AI coding agents](articles/ai-assisted-engineering-in-practice.md)
+
+Across BetStan, StanStock, TrackStan, home automation and board games: faster
+experimentation, difficult boundaries, and the point where too many agents and
+instructions started getting in the way.
+
 [BetStan: from learning TypeScript to AI-assisted engineering](articles/ai-assisted-engineering-betstan.md)
 
 From a learning project in 2023 to an AI experimentation platform in 2026.

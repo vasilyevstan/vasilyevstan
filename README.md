@@ -58,6 +58,11 @@ flowchart LR
 
 Private repository; **no public demo**. [Public summary and diagrams](https://gist.github.com/vasilyevstan/1909d4b1ca8c073954b8f436e2f1d57b)
 
+**Related open-source project:** [Solar MCP](https://github.com/vasilyevstan/solar)
+connects AI assistants to a Huawei solar inverter over local Modbus TCP. It reads
+generation and device status by default. Generation-limit controls stay off unless
+enabled locally, and each change is checked by reading the value back.
+
 ### Board games: Catanastan and Zombies in da House
 
 | Catanastan                                                                                        | Zombies in da House                                                                                                         |

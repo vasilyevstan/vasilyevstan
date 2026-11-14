@@ -1,4 +1,4 @@
-# AI-assisted engineering without outsourcing judgment: a BetStan case study
+# AI-assisted engineering in BetStan: a compatibility case study
 
 _Stan Vasilyev · personal project; opinions are my own._
 

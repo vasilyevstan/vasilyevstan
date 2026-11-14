@@ -1,7 +1,7 @@
 # Catanastan: server-authoritative multiplayer at the edge
 
 An original three- or four-player island strategy game with shared rules across
-local and edge runtimes. **Independent game, not an official CATAN product.**
+local and edge runtimes.
 
 **[Play the live demo](https://catanastan.syntal.workers.dev)** · private source repository
 

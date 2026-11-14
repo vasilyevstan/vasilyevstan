@@ -2,22 +2,20 @@
 
 _Stan Vasilyev. Personal projects; opinions are my own._
 
-The productivity gain from AI coding tools has been enormous in my personal
-projects. That is my experience, not a measured claim about how much faster
-everyone should work.
+Used well, AI coding agents can make engineering work dramatically more
+productive—not just by helping one person write code faster, but by helping
+teams explore alternatives and move independent work forward in parallel. The
+gains are not automatic: too many agents, documents and checks can make finishing
+a change harder than writing it.
 
-I have also crowded a project with so many agents, documents and checks that
-finishing a change became harder than writing it. Both experiences belong in
-this story.
+These examples show both the leverage and the judgment needed to use it well.
+They are project case studies, not a controlled productivity study. Across them,
+the hard questions are what data to trust, when a change is ready, and when
+software is allowed to act.
 
-The examples show what I built and the judgment that remained my responsibility:
-deciding what data to trust, when a change was ready, and when software was
-allowed to act.
-
-By an agent, I mean a coding assistant given a task, context and tools. Working
-with several can help me explore alternatives or develop independent parts in
-parallel. It also creates work: someone must reconcile their changes, check
-their assumptions and decide when the result is ready.
+An agent is a coding assistant given a task, context and tools. Several can work
+on bounded tasks in parallel, but their results still need to be reconciled and
+checked by an accountable owner.
 
 ## BetStan: the learning goal changed
 
@@ -35,13 +33,13 @@ examines one such change.
 ### Moving from Azure to OCI
 
 One difficult episode was moving the system from Azure to Oracle Cloud
-Infrastructure (OCI), with a more cost-constrained runtime. Moving containers
-was only part of it. Timers and queued messages could trigger new writes just
-when the migration needed the data to stop changing.
+Infrastructure (OCI) to run it under tighter cost constraints. Moving containers
+was only part of it: scheduled tasks and messages already in the queue could
+still change data during the handoff.
 
-One attempted way of stopping writes revoked messaging permissions. It broke
-producer connections and removed consumers instead of leaving a quiet,
-recoverable system. The [revised procedure](https://github.com/vasilyevstan/betstan/pull/205)
+One attempt to stop writes was to revoke messaging permissions. That broke the
+services sending messages and caused the receiving processes to disappear,
+leaving no quiet system to restart. The [revised procedure](https://github.com/vasilyevstan/betstan/pull/205)
 controlled message routing instead, kept the message consumers registered, and
 specified the order for restarting services and recovering from failures.
 
@@ -122,14 +120,14 @@ are modelled, not live telemetry._
 
 [TrackStan](https://github.com/vasilyevstan/LiveTrafficStan) combines external
 traffic feeds on an interactive map. One [recovery change](https://github.com/vasilyevstan/LiveTrafficStan/pull/603)
-had to preserve a provider's retry deadline when the user moved the map or
-paused and resumed updates. "Try again faster" would have violated the
-provider's timing rules.
+had to preserve the wait before asking a provider for data again, even when
+the user moved the map or paused and resumed updates. Asking too soon would have
+broken the provider's rules.
 
-It also rejected implausibly future-dated positions before they could make the
-cache look fresh. Controlled-clock tests made those cases repeatable. Getting
-markers on screen was only the visible part; deciding when their data could be
-trusted was part of the feature too.
+It also rejected positions dated implausibly far in the future before they
+could make cached data appear fresh. Tests with a controlled clock made those
+cases repeatable. Getting the markers on screen was only part of the work;
+deciding whether the data could be trusted mattered too.
 
 ### Home Automation: a safety check can be too strict
 
@@ -192,5 +190,7 @@ still confronting the work behind a usable multiplayer game.
 - **Keep one owner through delivery.** Reuse valid evidence, resolve concrete
   failures and distinguish merged code from an observed running result.
 
-The productivity gain is real in my own work. The skill is learning what to
-delegate, what to verify, and when to stop adding machinery.
+The productivity opportunity is bigger than faster coding: it is exploring more
+options and moving independent work forward without losing ownership of the
+result. That takes knowing what to delegate, what to verify, and when to stop
+adding machinery.

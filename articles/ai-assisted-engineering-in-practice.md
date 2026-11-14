@@ -39,7 +39,7 @@ still change data during the handoff.
 
 One attempt to stop writes was to revoke messaging permissions. That broke the
 services sending messages and caused the receiving processes to disappear,
-instead of leaving a quiet system that could be safely restarted. The [revised procedure](https://github.com/vasilyevstan/betstan/pull/205)
+leaving no quiet system to restart. The [revised procedure](https://github.com/vasilyevstan/betstan/pull/205)
 controlled message routing instead, kept the message consumers registered, and
 specified the order for restarting services and recovering from failures.
 
@@ -126,9 +126,8 @@ broken the provider's rules.
 
 It also rejected positions dated implausibly far in the future before they
 could make cached data appear fresh. Tests with a controlled clock made those
-cases repeatable. Getting
-markers on screen was only the visible part; deciding when their data could be
-trusted was part of the feature too.
+cases repeatable. Getting the markers on screen was only part of the work;
+deciding whether the data could be trusted mattered too.
 
 ### Home Automation: a safety check can be too strict
 

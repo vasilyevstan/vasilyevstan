@@ -27,10 +27,11 @@ for backend, frontend, testing and other tasks. An [optional coordinator](https:
 can delegate bounded work, but one owner remains responsible for the result.
 These are development workflows, not AI agents making betting decisions.
 
-In my own work, the productivity gain has been enormous. That is my experience,
-not a measured speedup. Turning that capacity into reliable software still means
-setting scope, sharing context, checking output and avoiding unnecessary handoffs.
-More agents are not automatically better.
+The productivity gains can be enormous, but they do not come simply from
+writing code faster. Agents can help explore alternatives and move independent
+work forward in parallel. Turning that capacity into reliable software still
+means setting scope, sharing context, checking output and avoiding unnecessary
+handoffs. More agents are not automatically better.
 
 The compatibility case below is one example from that second phase. A visual
 editor was the brief; preserving compatibility with older services was the less

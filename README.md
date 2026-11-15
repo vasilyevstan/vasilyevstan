@@ -38,8 +38,9 @@ I started BetStan in 2023 to learn TypeScript and build microservices. Within tw
 months, a working version was running on DigitalOcean. Then I put it on the shelf.
 
 In 2026 I brought it back as a place to practise AI-assisted engineering and
-multi-agent development. The productivity gain has been enormous in my own work,
-but useful results depend on clear tasks, good context and careful verification.
+multi-agent development. AI can make engineering work dramatically more
+productive through faster experimentation and parallel work. Useful results
+still depend on clear tasks, good context and careful verification.
 
 [Live demo](https://betstan.xyz) · [Repository](https://github.com/vasilyevstan/betstan) ·
 [AI-assisted engineering case study](articles/ai-assisted-engineering-betstan.md)
@@ -70,7 +71,7 @@ enabled locally, and each change is checked by reading the value back.
 
 | Catanastan                                                                                        | Zombies in da House                                                                                                         |
 | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| [![Catanastan public landing page](assets/catanastan.png)](https://catanastan.syntal.workers.dev) | [![Zombies in da House gameplay, supplied by the author](assets/zombies-later-gameplay.png)](https://zombie-in-da-house.syntal.workers.dev) |
+| [![Catanastan public landing page](assets/catanastan.png)](https://catanastan.syntal.workers.dev) | [![Zombies in da House public landing page](assets/zombies-in-da-house.png)](https://zombie-in-da-house.syntal.workers.dev) |
 
 Two multiplayer browser games hosted on Cloudflare Workers and Durable Objects.
 The server controls game state, and the same rules run locally and online. Both
@@ -83,8 +84,8 @@ Zombies in da House's recorded code milestones run from the first playable
 implementation on 6 November to v19 on 14 November 2026.
 [See the prototype-to-game comparison](projects/zombies-in-da-house-edge-multiplayer.md#how-it-evolved).
 
-Both source repositories remain private. Images show Catanastan's public landing
-page and an author-supplied Zombies in da House gameplay capture.
+Both source repositories remain private. The images show the games' public
+landing pages.
 
 ## Writing
 

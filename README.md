@@ -19,7 +19,7 @@ _Personal projects; opinions are my own._ · [LinkedIn](https://www.linkedin.com
 - [What I learned building with AI coding agents](articles/ai-assisted-engineering-in-practice.md):
   a fix that could not ship, how we got delivery back, and lessons from five projects.
 - [BetStan: from learning TypeScript to AI-assisted engineering](articles/ai-assisted-engineering-betstan.md):
-  a compatibility bug that independent review caught.
+  from a pre-match prototype to live betting, reusable markets and risk controls.
 - [How I ship](how-i-ship.md): the working rules I keep.
 
 ## Projects

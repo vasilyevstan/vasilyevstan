@@ -2,160 +2,188 @@
 
 _Stan Vasilyev · personal project; opinions are my own._
 
-![BetStan public home page](../assets/betstan.png)
-
 [BetStan](https://github.com/vasilyevstan/betstan) is a sportsbook **simulation** I
-build hands-on with AI coding agents. It has scheduled football events, compressed
-live matches, pre-match and live betting, moderation and settlement, but
+build hands-on with AI coding agents. It has
 [no real-money bets or real match feeds](https://github.com/vasilyevstan/betstan/blob/eeb60e6ebec34945b16de734c3361d00fcbc300b/README.md#L3-L7).
 
-## 2023: learning by building
+My companion article, [What I learned building with AI coding agents](ai-assisted-engineering-in-practice.md),
+is about the delivery process breaking and how I cut it back. This one is the other
+side: what an architecture I understand, plus a process that works, let me add to
+the product.
 
-I started BetStan in 2023 to learn TypeScript and build microservices. Within two
-months, I had a working version running on DigitalOcean. Then I put the project
-on the shelf.
+## Where it started
 
-## 2026: a second life
+I started BetStan in 2023 to learn TypeScript and build microservices. Within about
+two months I had a working version running on DigitalOcean. Then I put it on the
+shelf.
 
-In 2026 I returned to it with a new purpose: a place to practise AI-assisted
-engineering on a codebase with real dependencies, state and deployment concerns.
-That includes multi-agent development: deciding which work can run independently,
-giving agents context, and bringing their contributions back together.
+The earliest history I can still show is from 2024. A
+[preserved snapshot from that time](https://github.com/vasilyevstan/betstan/tree/ce1a5a6323b85d7cb5b101e3c903d140ed5c5e31)
+already had the basics:
 
-The repository contains [reusable specialist agents](https://github.com/vasilyevstan/betstan/blob/e3c2edc7e6dc76bd4b36d690696e25f68625bd16/.github/agents/README.md#L13-L29)
-for backend, frontend, testing and other tasks. An [optional coordinator](https://github.com/vasilyevstan/betstan/blob/e3c2edc7e6dc76bd4b36d690696e25f68625bd16/.github/agents/betstan-delivery-coordinator.agent.md#L9-L28)
-can delegate bounded work, but one owner remains responsible for the result.
-These are development workflows, not AI agents making betting decisions.
+- [sign-up, login and logout](https://github.com/vasilyevstan/betstan/blob/ce1a5a6323b85d7cb5b101e3c903d140ed5c5e31/client/src/App.js#L50-L70),
+  an event catalogue, bet slips, and betting history and statistics;
+- pre-match [match-winner (1X2) and correct-score markets](https://github.com/vasilyevstan/betstan/blob/ce1a5a6323b85d7cb5b101e3c903d140ed5c5e31/client/src/pages/event/product/ProductsList.js#L5-L17);
+- a Backoffice to create events, control visibility and enter results;
+- services to accept and settle bets, plus a
+  [Gamemaster](https://github.com/vasilyevstan/betstan/blob/ce1a5a6323b85d7cb5b101e3c903d140ed5c5e31/gamemaster/src/worker/GamemasterWorker.ts#L17-L78)
+  that drew random final scores and created replacement events. Matches did not
+  progress live.
 
-The productivity gains can be enormous, but they do not come simply from
-writing code faster. Agents can help explore alternatives and move independent
-work forward in parallel. Turning that capacity into reliable software still
-means setting scope, sharing context, checking output and avoiding unnecessary
-handoffs. More agents are not automatically better.
+That is an early preserved baseline, not an exact inventory of the 2023 version.
+The project also has a 2025 history on Azure before the work described below.
 
-The compatibility case below is one example from that second phase. A visual
-editor was the brief; preserving compatibility with older services was the less
-obvious engineering problem.
+| Early preserved baseline (2024 source) | Later interface (2026 source) |
+| --- | --- |
+| ![BetStan early design: dark event list with pre-match markets](../assets/betstan-early-reconstructed.png) | ![BetStan current design: live and pre-match events with richer markets](../assets/betstan-current-reconstructed.png) |
 
-## The invariant: presentation never decides bet validity
+_Both images were rendered from source at
+[`ce1a5a6`](https://github.com/vasilyevstan/betstan/tree/ce1a5a6323b85d7cb5b101e3c903d140ed5c5e31) and
+[`1f6728a`](https://github.com/vasilyevstan/betstan/tree/1f6728ac71430b3f0a1da457045d3a7f273b25ca)
+with synthetic data and no external requests. They are not screenshots from the
+time and do not show that a deployed backend works. The early build used a current
+compatible toolchain._
+
+## A second life with AI agents
+
+In 2026 I returned to BetStan as a place to practise AI-assisted and multi-agent
+engineering. Instead of starting another prototype, I could extend a system
+whose data flow and responsibilities I already understood.
 
 BetStan's services exchange durable facts over a message bus. Delivery is
 [at-least-once](https://github.com/vasilyevstan/betstan/blob/eeb60e6ebec34945b16de734c3361d00fcbc300b/docs/wiki/Architecture.md#L159-L170):
 duplicates and reordering are expected, consumers must be safe to replay, and the
-live stream to browsers is a projection rather than the source of truth.
+live stream to browsers is a projection rather than the source of truth. Moderation
+decides whether a bet is accepted; Resulting decides how it settles.
 
-A presentation feature therefore has a firm boundary. Layout can change how
-outcomes appear, but it must not change the configuration used for pricing,
-acceptance, moderation or settlement. This is a deliberately broad engineering
-laboratory, not evidence that every product needs this service architecture or
-its operational overhead.
-
-## The brief: a visual market-layout editor
-
-Operators needed to arrange outcome tiles: which tiles go where, how wide they
-are, and how the same layout can be reused. The feature also needed to preserve
-existing standard markets and avoid rewriting shared contracts merely to
-change a screen.
-
-The first impression is "just add some layout metadata." The compatibility
-question is what happens when older code reads, copies, compares or rewrites the
-record containing that metadata.
-
-## The risk, in plain language
-
-Mixed-version behavior matters during upgrades and rollbacks. An older writer
-does not know about a new layout field, but it still knows the old template
-version shape and the fingerprint used to recognize a repeated event-market
-creation request.
-
-Nesting optional presentation inside those existing structures is not
-automatically safe. A new field can change the shape that predecessor code copies
-or compares, even if the author regards it as cosmetic. Shared betting
-configuration must also retain its strict, layout-free shape.
-
-[PR #1057](https://github.com/vasilyevstan/betstan/pull/1057) records that an
-independent service-contract review found a mixed-writer issue in the initial
-representation. The rejected representation was corrected in isolated tests;
-this was **not a production incident**.
-
-## How the delivery process caught it
-
-Three parts of the workflow mattered.
-
-**One accountable owner.** BetStan's
-[agent guidance](https://github.com/vasilyevstan/betstan/blob/eeb60e6ebec34945b16de734c3361d00fcbc300b/docs/wiki/Agents.md)
-keeps one owner responsible for scope, implementation, verification and
-acceptance. Specialists are optional capabilities, not a conveyor belt.
-
-**Independent verification at the changed boundary.** This feature touched
-persisted records shared with predecessor writers. The review therefore examined
-service contracts and compatibility, not only the appearance of the editor.
-After the correction, a narrow verification checked the specific boundary again.
-
-**Separate source acceptance from release.** The
-[contribution rules](https://github.com/vasilyevstan/betstan/blob/eeb60e6ebec34945b16de734c3361d00fcbc300b/CONTRIBUTING.md)
-distinguish accepting source, passing the relevant exact-source checks, and
-deploying it. A merged PR is not proof of production availability.
-
-The useful contribution of AI-assisted engineering here was exploration and
-implementation within that process. Agreement between models was not the
-acceptance criterion; executable evidence was.
-
-## The decision and the tradeoffs
+Those boundaries gave the features below a place to fit without rebuilding
+the product around each one. Agents helped with implementation; I still had to
+decide where each new piece belonged. This is a simplified view of the
+responsibilities, not a deployment diagram:
 
 ```mermaid
 flowchart LR
-    T["Template versions<br/>predecessor-compatible shape"] --> C["Unchanged betting configuration"]
-    C --> B["Pricing, acceptance and settlement"]
-    L["Backoffice layouts map<br/>keyed by template version"] --> S["Event-market layout snapshot"]
-    S --> UI["Browser presentation"]
+    LB["Pre-match, live and template markets"] --> M["Moderation: accepts bets"]
+    RC["Risk Centre rules"] --> M
+    M --> R["Resulting: settles bets"]
+    T["Market templates"] --> UI["Browser presentation"]
+    M -. facts .-> TL["Telemetry observer"]
+    UI -. visits .-> TL
 ```
 
-The [final design](https://github.com/vasilyevstan/betstan/blob/eeb60e6ebec34945b16de734c3361d00fcbc300b/docs/wiki/Architecture.md#L219-L237)
-separates the two paths:
+A note on timing: the durations below are elapsed time between public commits and
+pull requests. They are not person-hours or a controlled productivity
+measurement, and merging source is not the same as switching a feature on in
+production. I say which is which.
 
-- **Layouts live beside authority, not inside its shared data.** Backoffice stores
-  a [map keyed by template version](https://github.com/vasilyevstan/betstan/blob/eeb60e6ebec34945b16de734c3361d00fcbc300b/backoffice/src/model/MarketTemplate.ts#L5-L41)
-  and copies a layout snapshot onto each event market. Stored template versions
-  and creation fingerprints keep the predecessor shape. Layout is joined into
-  the authoring HTTP representation, never shared configuration or betting messages.
-- **A constrained grid rather than executable design.** Coordinates, spans and
-  outcome keys are validated. Missing or duplicate outcomes and overlapping tiles
-  are rejected. Arbitrary HTML, CSS and code are out of scope.
-- **A bounded loss is acceptable.** An older writer may omit or drop optional
-  presentation during an edit. Rules, prices and accepted bets remain unchanged.
-  We accepted that limitation instead of assuming every writer upgrades together.
-- **No shared-package migration.** Keeping presentation out of the shared
-  contracts avoids a coordinated contract release for this feature.
+## Live betting: a day to merge, roughly ten to activation
 
-## The evidence
+Live betting added ten-minute simulated matches with incidents, five live markets,
+separate pre-match and live slips, quotes moderated by the authoritative service,
+and durable settlement and history. Matches survive a restart, and existing events
+keep their legacy defaults.
 
-Two regression tests exercise the compatibility claim:
+The first feature contract and a deterministic match simulation were committed the
+same evening. About a day later the end-to-end source
+[merged](https://github.com/vasilyevstan/betstan/pull/219), with live kickoff still
+switched off. Successful permanent activation was recorded roughly ten calendar
+days after that first commit. The
+[activation record](https://github.com/vasilyevstan/betstan/pull/430) and the
+[pinned lessons](https://github.com/vasilyevstan/betstan/blob/1f6728ac71430b3f0a1da457045d3a7f273b25ca/infra/oci/LESSONS_LEARNED.md#L757-L792)
+cover browser, settlement, restart and live-stream checks. The next day a
+[follow-up](https://github.com/vasilyevstan/betstan/pull/432) fixed card density,
+grouping of finished matches, history readability and pre-match pricing.
 
-- The [predecessor-shaped test](https://github.com/vasilyevstan/betstan/blob/eeb60e6ebec34945b16de734c3361d00fcbc300b/backoffice/src/route/__test__/Markets.test.ts#L106-L130)
-  uses the old instance shape and fingerprint, replays the creation request,
-  publishes, and checks that publisher arguments contain no layout.
-- The [snapshot test](https://github.com/vasilyevstan/betstan/blob/eeb60e6ebec34945b16de734c3361d00fcbc300b/backoffice/src/route/__test__/Markets.test.ts#L61-L91)
-  checks that editing or archiving a template does not change the event-market
-  layout snapshot, and that the published configuration remains layout-free.
+**Learning:** merging the first version was much faster than getting to verified
+activation. Restarts, quote handling and settlement still needed evidence.
+Keeping live kickoff off separated implementation from switching the feature on.
 
-PR #1057 also records service tests and eight synthetic-browser journeys.
-Those are **historical PR-reported results**, not tests rerun for this article.
-The PR explicitly makes no production-availability claim. The sources establish
-an AI-assisted workflow, but do not identify which particular model found the
-defect.
+## Market templates: flexible presentation within validated limits
 
-## What transfers to other teams
+Market templates let an operator define a reusable, versioned market once and use
+it across events. Each event keeps its own snapshot. Templates describe which
+scores win and use modelled or manual prices; they flow through the existing
+quoting, moderation, settlement and history paths. A visual designer arranges
+outcome tiles on a grid: columns, spans, spacing and shapes, with pointer and
+keyboard controls. That lets me reuse a market with different presentations
+instead of building a separate screen each time. The flexibility is deliberately
+bounded: the designer does not accept arbitrary HTML or CSS.
 
-The strongest outcome was a smaller contract change, not more orchestration.
-Make the risky boundary explicit, keep one person accountable, and ask for
-independent evidence at that boundary. Once a concrete defect is corrected,
-verify that correction rather than repeating an entire review ceremony.
+From the first reusable-market contracts to the
+[template source](https://github.com/vasilyevstan/betstan/pull/1039) took about
+half a day. The [visual designer](https://github.com/vasilyevstan/betstan/pull/1057)
+and copyable starter templates
+[reached master](https://github.com/vasilyevstan/betstan/pull/1061) in under three
+days from those first contracts. That measures source delivery, not activation:
+[release acceptance](https://github.com/vasilyevstan/betstan/pull/1059) was left
+as a later step.
 
-The same principle informs my private home-energy project: assistants are
-read-only by default, device writes follow a separate guarded path, and new
-controllers start in zero-write Shadow mode. Greater control requires evidence
-gates or an explicit owner decision; controllers are never armed automatically.
+An independent review caught a compatibility problem: adding layout fields to
+records that older services copied or compared was not harmless metadata.
+Layouts now live
+[beside the betting configuration, not inside it](https://github.com/vasilyevstan/betstan/blob/1f6728ac71430b3f0a1da457045d3a7f273b25ca/docs/wiki/Architecture.md#L212-L255),
+and tests replay the old record shape. An older writer may lose optional
+presentation during an edit, but the betting configuration stays unchanged.
+The issue was caught before production.
+
+**Learning:** you can change how markets look without touching the rules that
+price and settle them, as long as presentation stays out of the authoritative data.
+
+## Risk Centre: a substantial extension without a new service
+
+Risk Centre adds rules for availability, timing and delay, stake, price, slip
+structure, activity, open exposure and customer loss. Decisions record which
+policy applied; reservations and saved outcomes prevent retries from consuming
+capacity twice or receiving a different answer.
+
+It was built without a new service. The rules run as a module inside the existing
+Moderation service. Backoffice provides the editor, Resulting still owns money
+movement, existing Slip and Bet readers supply the facts, and shared contracts are
+versioned. The [core](https://github.com/vasilyevstan/betstan/pull/1068) merged
+roughly two and a half hours after the first recorded accounting-foundation
+commit. The editable-rule refinement
+[reached master within about a day](https://github.com/vasilyevstan/betstan/pull/1076)
+of that starting point, not a day of total design effort. That promotion still
+had the runtime **disabled**, pending rollout; the earlier deployed read-only
+view was a separate result.
+
+The [scope](https://github.com/vasilyevstan/betstan/blob/1f6728ac71430b3f0a1da457045d3a7f273b25ca/docs/wiki/Risk-Centre.md#L3-L59)
+is the simulation's bet-acceptance and exposure controls, not a complete regulated
+risk platform. History-based rules also need their own
+[readiness checks](https://github.com/vasilyevstan/betstan/blob/1f6728ac71430b3f0a1da457045d3a7f273b25ca/docs/wiki/Risk-Centre.md#L87-L138).
+
+**Learning:** risk management did not become easy. It became tractable, because
+there was already one clear place where bets are accepted and one where they are
+settled.
+
+## Telemetry: a nice-to-have that stays out of the way
+
+I also wanted a small internal view of page visits and product activity.
+The telemetry service shows route visits and observes sign-ups,
+logins, slips, submissions, settlements and live updates. It draws 14-day charts
+and a coarse reachability check.
+
+It reads facts already on the message bus and keeps its own store: it observes
+betting rather than deciding whether a bet is valid.
+Its [semantics](https://github.com/vasilyevstan/betstan/blob/1f6728ac71430b3f0a1da457045d3a7f273b25ca/docs/wiki/Application-Processes.md#L731-L801)
+are honest: a visit is a page entry, not a unique person or a conversion. The
+application [merged](https://github.com/vasilyevstan/betstan/pull/560) about two
+days after its first implementation commit, building on earlier groundwork. The
+[readiness review](https://github.com/vasilyevstan/betstan/pull/627) that followed
+did not yet treat it as live.
+
+**Learning:** existing product events made an optional dashboard possible without
+changing who accepts or settles bets. Best-effort page counters must not become
+a second source of truth.
+
+## What transfers
+
+- **Architecture is the multiplier.** Agents moved fast inside boundaries I
+  understood; new features attached to existing authority instead of creating more.
+- **Separate source from release.** "Merged" and "live" are different claims, and
+  stating which one you mean keeps the story honest.
+- **Bound the flexibility.** Validated grids, versioned rules and disabled-by-default
+  controls gave useful freedom without putting bet validity at risk.
 
 **Agents help explore and implement. Accountable people and executable evidence
 decide what is accepted.**

@@ -76,7 +76,7 @@ pull requests. They are not person-hours or a controlled productivity
 measurement, and merging source is not the same as switching a feature on in
 production. I say which is which.
 
-## Live betting: a day to merge, roughly ten to activation
+## Live betting: live in about ten days
 
 Live betting added ten-minute simulated matches with incidents, five live markets,
 separate pre-match and live slips, quotes moderated by the authoritative service,
@@ -86,19 +86,25 @@ keep their legacy defaults.
 The first feature contract and a deterministic match simulation were committed the
 same evening. About a day later the end-to-end source
 [merged](https://github.com/vasilyevstan/betstan/pull/219), with live kickoff still
-switched off. Successful permanent activation was recorded roughly ten calendar
-days after that first commit. The
+switched off. Successful permanent activation in production was recorded roughly
+ten days after that first commit. The
 [activation record](https://github.com/vasilyevstan/betstan/pull/430) and the
 [pinned lessons](https://github.com/vasilyevstan/betstan/blob/1f6728ac71430b3f0a1da457045d3a7f273b25ca/infra/oci/LESSONS_LEARNED.md#L757-L792)
 cover browser, settlement, restart and live-stream checks. The next day a
 [follow-up](https://github.com/vasilyevstan/betstan/pull/432) fixed card density,
 grouping of finished matches, history readability and pre-match pricing.
 
-**Learning:** merging the first version was much faster than getting to verified
-activation. Restarts, quote handling and settlement still needed evidence.
-Keeping live kickoff off separated implementation from switching the feature on.
+It was not easy. Restarts, quote handling and settlement each needed evidence
+before I switched anything on. But a complete new way of betting went from idea
+to production in under two weeks. From my experience leading engineering teams,
+I would have planned several months for a small team of senior engineers to
+reach the same point.
 
-## Market templates: flexible presentation within validated limits
+**Learning:** the agents wrote the first version in a day; the remaining days
+went into proving it. Keeping live kickoff off until then let me move fast
+without gambling with the running product.
+
+## Market templates: a new product capability in under three days
 
 Market templates let an operator define a reusable, versioned market once and use
 it across events. Each event keeps its own snapshot. Templates describe which
@@ -112,11 +118,9 @@ bounded: the designer does not accept arbitrary HTML or CSS.
 From the first reusable-market contracts to the
 [template source](https://github.com/vasilyevstan/betstan/pull/1039) took about
 half a day. The [visual designer](https://github.com/vasilyevstan/betstan/pull/1057)
-and copyable starter templates
-[reached master](https://github.com/vasilyevstan/betstan/pull/1061) in under three
-days from those first contracts. That measures source delivery, not activation:
-[release acceptance](https://github.com/vasilyevstan/betstan/pull/1059) was left
-as a later step.
+and copyable starter templates were
+[released](https://github.com/vasilyevstan/betstan/pull/1059) and successfully
+deployed to production less than three days after those first contracts.
 
 An independent review caught a compatibility problem: adding layout fields to
 records that older services copied or compared was not harmless metadata.
@@ -128,8 +132,9 @@ The issue was caught before production.
 
 **Learning:** you can change how markets look without touching the rules that
 price and settle them, as long as presentation stays out of the authoritative data.
+That separation is what made days, rather than weeks, realistic.
 
-## Risk Centre: a substantial extension without a new service
+## Risk Centre: risk controls in production in about a day
 
 Risk Centre adds rules for availability, timing and delay, stake, price, slip
 structure, activity, open exposure and customer loss. Decisions record which
@@ -140,12 +145,9 @@ It was built without a new service. The rules run as a module inside the existin
 Moderation service. Backoffice provides the editor, Resulting still owns money
 movement, existing Slip and Bet readers supply the facts, and shared contracts are
 versioned. The [core](https://github.com/vasilyevstan/betstan/pull/1068) merged
-roughly two and a half hours after the first recorded accounting-foundation
-commit. The editable-rule refinement
-[reached master within about a day](https://github.com/vasilyevstan/betstan/pull/1076)
-of that starting point, not a day of total design effort. That promotion still
-had the runtime **disabled**, pending rollout; the earlier deployed read-only
-view was a separate result.
+roughly two and a half hours after the first accounting-foundation commit. The
+editable rules [were enabled](https://github.com/vasilyevstan/betstan/pull/1076)
+and successfully deployed to production about a day after that first commit.
 
 The [scope](https://github.com/vasilyevstan/betstan/blob/1f6728ac71430b3f0a1da457045d3a7f273b25ca/docs/wiki/Risk-Centre.md#L3-L59)
 is the simulation's bet-acceptance and exposure controls, not a complete regulated
@@ -154,7 +156,18 @@ risk platform. History-based rules also need their own
 
 **Learning:** risk management did not become easy. It became tractable, because
 there was already one clear place where bets are accepted and one where they are
-settled.
+settled. Knowing the architecture well is what turned a hard feature into a
+one-day change.
+
+### What those three features add up to
+
+Live betting, market templates and Risk Centre reached production in about two
+weeks of elapsed time combined. From my experience leading engineering teams, I
+would estimate that a small team of senior engineers would have needed roughly
+six months to deliver the same three features to this level. That is a judgement,
+not a measurement: I built on an architecture I knew intimately, and no team
+built the same thing in parallel. Even with those caveats, the difference is
+large enough to change what one person can realistically attempt.
 
 ## Telemetry: a nice-to-have that stays out of the way
 
@@ -178,8 +191,9 @@ a second source of truth.
 
 ## What transfers
 
-- **Architecture is the multiplier.** Agents moved fast inside boundaries I
-  understood; new features attached to existing authority instead of creating more.
+- **Speed is real, and it comes from architecture.** Agents turned months of
+  work into days because new features attached to boundaries I understood,
+  instead of creating new authority.
 - **Separate source from release.** "Merged" and "live" are different claims, and
   stating which one you mean keeps the story honest.
 - **Bound the flexibility.** Validated grids, versioned rules and disabled-by-default

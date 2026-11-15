@@ -2,9 +2,9 @@
 
 _Stan Vasilyev. Personal projects; opinions are my own._
 
-AI coding agents have made me much faster. In November, an idea for a board game
-became a playable multiplayer build in under four hours. A few weeks earlier, the
-same tools left a simple fix unreleased for nearly three weeks.
+AI coding agents have made me much faster. An idea for a board game became a
+playable multiplayer build in under four hours. Shortly before that, the same
+tools left a simple fix unreleased for three weeks.
 
 Both happened in my own projects, with the same tools. This article is about
 what made the difference. These are case studies from personal projects, not a
@@ -17,14 +17,14 @@ TypeScript and microservices. It is a sports-betting **simulation**, with no rea
 money or real match feeds. In 2026 I brought it back as a place to practise
 AI-assisted and multi-agent engineering.
 
-On 16 October I asked for something simple: bring the services back up and apply
-a few UI fixes, such as the page header. Production was already down. The last
-successful deploy had been on 11 October.
+I asked for something simple: bring the services back up and apply a few UI
+fixes, such as the page header. Production was already down; the last successful
+deploy had been five days earlier.
 
-The next successful production deploy was on **6 November**. In between there
-were eight failed deploy attempts. The UI fixes waited behind the recovery the
-whole time. On 3 November I wrote: "service is down over a month. the recovery
-is taking forever".
+The next successful production deploy came **three weeks** after my request:
+26 days between successful deploys, with eight failed attempts in that interval.
+The UI fixes waited behind the recovery. Two and a half weeks in, I wrote:
+"service is down over a month. the recovery is taking forever".
 
 ### Verifying the verification
 
@@ -37,21 +37,25 @@ The agents were busy the entire time. They reported blockers like these:
   where the checker's own temporary files made its clean-workspace check fail.
 
 Some of these were real defects. Many were checks guarding other checks. Every
-fix added more steps, and each new step could fail on its own. The pull-request
-build check took a median of 51 minutes in late October, and a few runs earlier
-that month took around seven hours. At one point the delivery flow had reached
-step 57.
+fix added more steps, and each new step could fail on its own. In the two weeks
+before the clean-up, the pull-request build check took a median of 51 minutes,
+and a few earlier runs took around seven hours. At one point the delivery flow
+had reached step 57.
 
 ### Losing control, and my part in it
 
 I asked again and again for less: "review gates and remove extra steps. step 57?
 really? remove 50 steps, now". Later: "you cannot deploy a ui fix over a day".
 
-The agents kept going back to their recovery path and their proofs. On 30 October
+The agents kept going back to their recovery path and their proofs. Two weeks in,
 I even asked for a simplifier agent with authority to stop work. It became one
-more role, and I later folded it into the coordinator. On 4 November an agent's
-working note still said: "the restore is currently taking precedence". That was
-the opposite of what I had asked for.
+more role, and I later folded it into the coordinator. Almost three weeks in, an
+agent's working note still said: "the restore is currently taking precedence".
+That was the opposite of what I had asked for.
+
+By then I had lost control of my own project and was desperate to get it back.
+I kept giving instructions and hoping that the next one would make a difference.
+It did not, and it felt hopeless.
 
 The honest part is that I had built this. Every rule, review and specialist had
 been added for a reason. Together they outranked my latest instruction. The
@@ -59,8 +63,9 @@ agents were following the process faithfully. The process was the problem.
 
 ### Cutting it back
 
-On 4–5 November I set two targets: a build check under 15 minutes and a
-production deploy under 30 minutes. Then we cut:
+Hoping for the next attempt to work was not enough. I set two targets: a build
+check under 15 minutes and a production deploy under 30 minutes. Then we changed
+the process:
 
 - [Fixed](https://github.com/vasilyevstan/betstan/pull/973) the deploy health check
   that restarts from an earlier reboot had been blocking.
@@ -76,10 +81,9 @@ independent review of sensitive changes and a way to recover all stayed.
 
 ### The structure that works now
 
-What I call our agent factory is not a system that generates agents. It is a
-reusable set of nine role definitions that every session starts from: a delivery
-coordinator; backend, frontend and test engineers; a UX expert; and reviewers for
-security, deployment safety, cloud operations and public documentation.
+The simpler setup has one delivery coordinator, with development, testing,
+design and operational specialists available when needed. Not every task needs
+all of them.
 
 - **One owner.** The coordinator carries a change from request to production.
   I remain accountable for what is accepted and released.
@@ -99,20 +103,23 @@ flowchart LR
 
 ### What changed
 
-| Measure | Before | After (9–15 Nov) |
+| Measure | Before (window measured) | After (following full week) |
 | --- | --- | --- |
-| Production deploys | 8 failed in a row between 11 Oct and 6 Nov | 11 of 12, median 12 min |
-| Production data rollouts | 17 of 42 succeeded (5 Oct – 1 Nov) | 33 of 36, median 13 min |
-| Pull-request build check | median 51 min (19 Oct – 1 Nov) | median 3.6 min |
-| Pull request, opened to merged | median 1.1 h, p90 6.8 h (26 Oct – 1 Nov) | median 0.1 h, p90 0.7 h |
+| Production deploys | 26 days between successes; 8 failed attempts | 11 of 12, median 12 min |
+| Production data rollouts | 17 of 42 succeeded (4 weeks) | 33 of 36, median 13 min |
+| Pull-request build check | median 51 min (2 weeks) | median 3.6 min |
+| Pull request, opened to merged | median 1.1 h, p90 6.8 h (1 week) | median 0.1 h, p90 0.7 h |
 
 Two days after the recovery, I asked for a player-profile page one evening. It
-was in production about 7.5 hours later. A wrong bet count I reported the next morning was fixed
-and released the same day.
+was in production about 7.5 hours later. A wrong bet count I reported the next
+morning was fixed and released the same day.
 
-These figures come from GitHub Actions in one person's project. The same week
-also included restoring production, so they show before and after, not cause and
-effect.
+These figures come from GitHub Actions and pull-request history in one person's
+project. The baseline windows differ in length, as shown; the comparison uses
+the following full week after recovery. The clean-up also included restoring
+production and fixing other delivery problems, so these are before-and-after
+observations, not proof that one change caused the improvement. Here, p90 means
+90% of pull requests took no longer than the stated time to merge.
 
 **Lesson:** telling the agents to simplify did not change the process they were
 running. I had to change the process itself, and adding another agent to manage
@@ -191,19 +198,19 @@ owns the game state.
 
 ## Zombies in da House: fast, but not in one prompt
 
-On 6 November at 18:34 I asked an agent whether it knew a board game I liked and
-whether we could make our own version. At 22:18 the first playable multiplayer
-build was committed. That is under four hours from idea to a playable game. The first cloud release
-followed the next morning, and over the next nine days it grew into the game it
-is now. I was running the BetStan clean-up at the same time; with full focus it
-would have been faster.
+One evening I asked an agent whether it knew a board game I liked and whether we
+could make our own version. Three hours and 44 minutes later, the first playable
+multiplayer build was committed. The first cloud release followed the next
+morning, and over the next nine days it grew into the game it is now. I was
+running the BetStan clean-up at the same time; with full focus it would have been
+faster.
 
-| 6 Nov: first playable build | 11 Nov: woods and new turn controls | 15 Nov: current game |
+| Day 1: first playable build | Day 6: woods and new turn controls | Day 10: current game |
 | --- | --- | --- |
 | ![First playable build: a simple tiled house on a flat green board](../assets/zombies-release-01-2026-11-06.png) | ![Forest floor, furnished house and objectives sidebar](../assets/zombies-release-04-2026-11-11.png) | ![Log-cabin walls, a marked van bay and detailed characters](../assets/zombies-release-06-2026-11-15.png) |
 
-_Rebuilt on 15 November from the original commits, not screenshots from those days.
-[All six releases](../projects/zombies-in-da-house-edge-multiplayer.md#how-it-evolved)._
+_Screenshots were rebuilt later from the original release commits, not captured at
+the time. Exact releases: [all six releases](../projects/zombies-in-da-house-edge-multiplayer.md#how-it-evolved)._
 
 The first prompt did not produce this game. Most changes came from playing it:
 solo players started in the middle and could not move on the first turn; hidden

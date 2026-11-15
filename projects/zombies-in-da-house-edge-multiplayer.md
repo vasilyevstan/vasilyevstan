@@ -1,6 +1,6 @@
 # Zombies in da House: from prototype to survival game
 
-An original browser tabletop game: explore a monster-filled house, find the
+A browser tabletop game, inspired by a board game I like: explore a monster-filled house, find the
 vehicle key and fuel, and decide when to escape.
 
 **[Play the live demo](https://zombie-in-da-house.syntal.workers.dev)** · private source repository
@@ -11,37 +11,28 @@ someone remains alive.
 
 ## How it evolved
 
-A sparse 3D tabletop grew into a furnished survival game with detailed characters,
-a forest setting and more ways to play. The board layout is still recognisable,
-but the visual identity and the experience around it changed considerably.
+On 6 November at 18:34 I asked an agent whether we could make our own version of
+a board game I liked. The first playable multiplayer build was committed at 22:18
+the same evening, under four hours later, and the first cloud release followed the next morning. I built it
+alongside other projects; with full focus it would have been faster.
 
-| Early prototype: Lastlight House | Later gameplay: Zombies in da House |
-| --- | --- |
-| ![Early setup screen with a simple tiled house, low-poly characters and the original error banner](https://raw.githubusercontent.com/vasilyevstan/vasilyevstan/main/assets/zombies-early-prototype.png) | ![Later gameplay with a furnished house, forest, detailed characters, four bot companions and turn controls](https://raw.githubusercontent.com/vasilyevstan/vasilyevstan/main/assets/zombies-later-gameplay.png) |
+The first prompt did not produce this game. Most changes came from playing it and
+writing down what felt wrong: solo players could not move on their first turn,
+hidden items near the fireplace were invisible, carried items looked unnatural.
+Each round of play produced the next set of fixes.
 
-_Original author-supplied captures, not reconstructed scenes. One shows setup,
-the other gameplay; their dates and exact revisions are unverified. The early
-prototype's error banner is retained._
+| 6 Nov · first playable build | 7 Nov · first cloud release | 9 Nov · haunted house, bots in every mode |
+| --- | --- | --- |
+| ![Simple tiled house on a flat green board with sparse trees](../assets/zombies-release-01-2026-11-06.png) | ![Moonlit blue palette, furnished house and an arrival van](../assets/zombies-release-02-2026-11-07.png) | ![Same moonlit board with a one-line game title](../assets/zombies-release-03-2026-11-09.png) |
+| **11 Nov · woods and pickup feedback** | **13 Nov · forest road, hearth, autopilot** | **15 Nov · log cabin and van bay** |
+| ![Textured forest floor, closer board and objectives sidebar](../assets/zombies-release-04-2026-11-11.png) | ![Forest road and gates, a lit hearth, spinner and autopilot control](../assets/zombies-release-05-2026-11-13.png) | ![Log-cabin walls, a marked van bay and detailed characters](../assets/zombies-release-06-2026-11-15.png) |
 
-The change was more than a visual reskin. Solo companions, server-controlled
-autopilot, objectives and turn controls developed alongside the art and setting.
-The in-game bots are separate from the AI coding agents used during development.
+_Rebuilt on 15 November from the exact main-branch commits (f6e57cf, 14b2572,
+48b47c9, f43711f, ff6dda9, 43a0044), not screenshots taken on those days. Each
+shows turn one of a two-player shared-device game with the default camera. The
+9 November release added bots, which this two-player view does not show._
 
-### Recorded development milestones
-
-The source history progresses from the first playable implementation on
-6 November to v19 on 14 November 2026: just over seven days.
-
-| Date (2026) | Recorded change |
-| --- | --- |
-| 6 November | First browser tabletop with a 3D board, shared-device and online play, exploration and escape. |
-| 7 November | Cloudflare runtime, solo play and bot turns scheduled durably across restarts. |
-| 9-11 November | Rebuilt character and monster models, textured woodland and clearer pickup feedback. |
-| 12 November | Server-controlled autopilot with the option to take back control. |
-| 14 November | v19: log-cabin walls, revised van-bay escape and arrival/end-state cutscenes. |
-
-These dates describe code milestones, not screenshot timestamps, deployment
-dates or total hours worked. The source repository remains private.
+**Lesson:** AI made the first version fast; playing it is what made it good.
 
 ## What this demonstrates
 

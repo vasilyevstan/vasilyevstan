@@ -23,8 +23,9 @@ deploy had been five days earlier.
 
 The next successful production deploy came **three weeks** after my request:
 26 days between successful deploys, with eight failed attempts in that interval.
-The UI fixes waited behind the recovery. Two and a half weeks in, I wrote:
-"service is down over a month. the recovery is taking forever".
+The UI fixes waited behind the recovery. Two and a half weeks in, I was
+documenting how long recovery was taking and how long the services had been
+unavailable.
 
 ### Verifying the verification
 
@@ -44,14 +45,15 @@ had reached step 57.
 
 ### Losing control, and my part in it
 
-I asked again and again for less: "review gates and remove extra steps. step 57?
-really? remove 50 steps, now". Later: "you cannot deploy a ui fix over a day".
+I repeatedly asked for fewer review gates and steps, pointing out that 57 steps
+for a small UI fix made no sense and that a UI fix should not take a day to
+deploy.
 
 The agents kept going back to their recovery path and their proofs. Two weeks in,
 I even asked for a simplifier agent with authority to stop work. It became one
 more role, and I later folded it into the coordinator. Almost three weeks in, an
-agent's working note still said: "the restore is currently taking precedence".
-That was the opposite of what I had asked for.
+agent's working note still prioritized restoration over the UI work. That was the
+opposite of what I had asked for.
 
 By then I had lost control of my own project and was desperate to get it back.
 I kept giving instructions and hoping that the next one would make a difference.
@@ -196,10 +198,10 @@ they are allowed to see. A polished 3D board does not solve any of that.
 **Lesson:** in multiplayer games, the hard work is invisible. Decide early who
 owns the game state.
 
-## Zombies in da House: fast, but not in one prompt
+## Zombies in da House: fast through iteration
 
-One evening I asked an agent whether it knew a board game I liked and whether we
-could make our own version. Three hours and 44 minutes later, the first playable
+One evening I started exploring whether we could make our own version of a board
+game I liked. Three hours and 44 minutes later, the first playable
 multiplayer build was committed. The first cloud release followed the next
 morning, and over the next nine days it grew into the game it is now. I was
 running the BetStan clean-up at the same time; with full focus it would have been
@@ -212,13 +214,13 @@ faster.
 _Screenshots were rebuilt later from the original release commits, not captured at
 the time. Exact releases: [all six releases](../projects/zombies-in-da-house-edge-multiplayer.md#how-it-evolved)._
 
-The first prompt did not produce this game. Most changes came from playing it:
-solo players started in the middle and could not move on the first turn; hidden
-items near the fireplace were invisible; carried items looked unnatural. Each
-round of play produced a new list of fixes.
+The first playable version was only a beginning. Most changes came from playing
+it: solo players started in the middle and could not move on the first turn;
+hidden items near the fireplace were invisible; carried items looked unnatural.
+Each round of play produced a new list of fixes.
 
 **Lesson:** the speed comes from short loops with a person playing the game, not
-from a perfect first prompt.
+from trying to specify the whole game up front.
 
 ## What I keep doing
 

@@ -203,16 +203,16 @@ owns the game state.
 One evening I started exploring whether we could make our own version of a board
 game I liked. Three hours and 44 minutes later, the first playable
 multiplayer build was committed. The first cloud release followed the next
-morning, and over the next nine days it grew into the game it is now. I was
-running the BetStan clean-up at the same time; with full focus it would have been
-faster.
+morning. The three boards below show early milestones; the
+[illustrated game history](../projects/zombies-in-da-house-edge-multiplayer.md)
+follows sixteen snapshots through v28.
 
-| Day 1: first playable build | Day 6: woods and new turn controls | Day 10: current game |
+| First playable build | The house moves into the woods | v19: log cabin and van bay |
 | --- | --- | --- |
-| ![First playable build: a simple tiled house on a flat green board](../assets/zombies-release-01-2026-11-06.png) | ![Forest floor, furnished house and objectives sidebar](../assets/zombies-release-04-2026-11-11.png) | ![Log-cabin walls, a marked van bay and detailed characters](../assets/zombies-release-06-2026-11-15.png) |
+| ![First playable build: a simple tiled house on a flat green board](../assets/zombies-history-first-board.jpg) | ![Forest floor, furnished house and objectives sidebar](../assets/zombies-history-living-woods.jpg) | ![Log-cabin walls and a marked van bay](../assets/zombies-history-van-bay.jpg) |
 
 _Screenshots were rebuilt later from the original release commits, not captured at
-the time. Exact releases: [all six releases](../projects/zombies-in-da-house-edge-multiplayer.md#how-it-evolved)._
+the time. [Compare six early builds](../projects/zombies-in-da-house-edge-multiplayer.md#the-first-ten-days)._
 
 The first playable version was only a beginning. Most changes came from playing
 it: solo players started in the middle and could not move on the first turn;

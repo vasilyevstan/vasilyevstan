@@ -209,10 +209,10 @@ follows sixteen snapshots through v28.
 
 | First playable build | The house moves into the woods | v19: log cabin and van bay |
 | --- | --- | --- |
-| ![First playable build: a simple tiled house on a flat green board](../assets/zombies-history-first-board.jpg) | ![Forest floor, furnished house and objectives sidebar](../assets/zombies-history-living-woods.jpg) | ![Log-cabin walls and a marked van bay](../assets/zombies-history-van-bay.jpg) |
+| ![First playable build: a simple tiled house on a flat green board](../assets/zombies-history/01-lastlight-board.jpg) | ![Forest floor, furnished house and objectives sidebar](../assets/zombies-history/07-living-woods-board.jpg) | ![Log-cabin walls and a marked van bay](../assets/zombies-history/11-v19-board.jpg) |
 
 _Screenshots were rebuilt later from the original release commits, not captured at
-the time. [Compare six early builds](../projects/zombies-in-da-house-edge-multiplayer.md#the-first-ten-days)._
+the time. [Read the full illustrated history](../projects/zombies-in-da-house-edge-multiplayer.md#first-playable-build-lastlight-house)._
 
 The first playable version was only a beginning. Most changes came from playing
 it: solo players started in the middle and could not move on the first turn;

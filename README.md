@@ -20,6 +20,8 @@ _Personal projects; opinions are my own._ · [LinkedIn](https://www.linkedin.com
   a fix that could not ship, how we got delivery back, and lessons from five projects.
 - [BetStan: from learning TypeScript to AI-assisted engineering](articles/ai-assisted-engineering-betstan.md):
   from a pre-match prototype to live betting, reusable markets and risk controls.
+- [How Zombies in da House evolved](projects/zombies-in-da-house-edge-multiplayer.md):
+  sixteen snapshots of a multiplayer game, and what playtesting changed after the first evening.
 - [How I ship](how-i-ship.md): the working rules I keep.
 
 ## Projects

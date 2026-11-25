@@ -2,7 +2,7 @@
 
 **[Play the live demo](https://zombie-in-da-house.syntal.workers.dev)** · private source repository
 
-It started with a question: _do you know the board game «Зомби в доме», and can we make our own version of it?_ The answer became an original browser tabletop in the same spirit — find the vehicle key and the fuel, get back to the van, and if you fall, play for the house — with its own art, rules text and code. The first playable multiplayer build was committed the same evening. Seventeen days later the game had reached v28, after 163 commits on `main` and 66 merged pull requests.
+It started with a question: _do you know the board game «Зомби в доме», and can we make our own version of it?_ The answer became an original browser tabletop in the same spirit — find the vehicle key and the fuel, get back to the van, and if you fall, play for the house — with its own art, rules text and code. The first playable multiplayer build was committed the same evening. Eighteen days later the game had reached v28.1, after 174 commits on `main` and 73 merged pull requests.
 
 Every picture on this page comes from the real code of its day. Each snapshot was checked out, built from scratch and played again with the same seed; nothing is a mock-up. See [How these pictures were made](#how-these-pictures-were-made). The Warden and the van, the two models redesigned most often, also get [a section of their own](#the-warden-and-the-van).
 
@@ -10,26 +10,27 @@ Every picture on this page comes from the real code of its day. Each snapshot wa
 
 ## At a glance
 
-Time is counted from the first commit to each snapshot's merge to `main`: in hours on the first day, then in days, where day 1 is the first 24 hours.
+Time is counted from the first commit to each snapshot's merge to `main`: in hours on the first day, rounded to the nearest hour, then in days, where day 1 is the first 24 hours.
 
-| When       | Snapshot                     | Changes                                  | Highlights                                                                      |
-| ---------- | ---------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------- |
-| Hour 0     | Lastlight House, [`f6e57cf`] | first commit                             | A playable multiplayer table: shared device or online room, spin to move.       |
-| Hour 7     | Blue miniature, [`14b2572`]  | [#1], [#3]                               | The name, a moonlit furnished cutaway, invitations and the first cloud release. |
-| Hour 16    | Solo nights, [`bb9056f`]     | [#7]                                     | Play alone with up to four bot companions; your rooms on the homepage.          |
-| Day 3      | Timber house, [`48b47c9`]    | [#9]                                     | A decaying wooden house, bots in every mode, the combat dial.                   |
-| Day 4      | Blender cast, [`7439b82`]    | [#11], [#13]                             | Detailed survivors and monsters modeled in Blender.                             |
-| Day 4      | Haunted grounds, [`75db377`] | [#14]                                    | Compact hero selection and explicit turn controls.                              |
-| Day 5      | Living woods, [`2b5cbea`]    | [#16], [#19], [#21]                      | Baked woods and trees, a burning hearth, house totals, a compact dock.          |
-| Day 6      | Getaway bus, [`096a1f2`]     | [#23]                                    | Compact setup, one Menu button, monsters rising from the floor, the hippie bus. |
-| Day 6      | v16, [`ff88425`]             | [#27]                                    | The original's weighted spinner, Autopilot, haunted gates.                      |
-| Day 7      | v17–v18, [`ff6dda9`]         | [#29], [#31]                             | Arrival and departure cutscenes, the Hall of Fame, rescues, the Bazooka.        |
-| Day 8      | v19, [`06749f5`]             | [#33]                                    | The van bay, a log cabin, a sunken road, four cutscenes.                        |
-| Days 8–10  | v20–v23, [`1389669`]         | [#38], [#40], [#42], [#44]               | Roster hearts, a last stand, mood-matched music, discs on every hidden cell.    |
-| Days 11–12 | v24–v25, [`0d1ae73`]         | [#48], [#50]                             | The rulebook map, a Blender gravel road, clean music handoffs.                  |
-| Days 12–16 | v26, [`84bd0de`]             | [#52], [#56], [#60], [#64], [#66], [#68] | Smarter bots, a smooth entrance, a scene for every fall, an aerodynamic van.    |
-| Day 17     | v27, [`06dba2a`]             | [#70]                                    | IDDQD and IDKFA, a winged Warden, checkmarks for survivors who reach the van.   |
-| Day 18     | v28, [`0504769`]             | [#72]                                    | No cheated games in the Hall of Fame, readable supplies, a Warden that walks.   |
+| When       | Snapshot                          | Changes                                  | Highlights                                                                      |
+| ---------- | --------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------- |
+| Hour 0     | Lastlight House, [`f6e57cf`]      | first commit                             | A playable multiplayer table: shared device or online room, spin to move.       |
+| Hour 7     | Blue miniature, [`14b2572`]       | [#1], [#3]                               | The name, a moonlit furnished cutaway, invitations and the first cloud release. |
+| Hour 16    | Solo nights, [`bb9056f`]          | [#7]                                     | Play alone with up to four bot companions; your rooms on the homepage.          |
+| Day 3      | Timber house, [`48b47c9`]         | [#9]                                     | A decaying wooden house, bots in every mode, the combat dial.                   |
+| Day 4      | Blender cast, [`7439b82`]         | [#11], [#13]                             | Detailed survivors and monsters modeled in Blender.                             |
+| Day 4      | Haunted grounds, [`75db377`]      | [#14]                                    | Compact hero selection and explicit turn controls.                              |
+| Day 5      | Living woods, [`2b5cbea`]         | [#16], [#19], [#21]                      | Baked woods and trees, a burning hearth, house totals, a compact dock.          |
+| Day 6      | Getaway bus, [`096a1f2`]          | [#23]                                    | Compact setup, one Menu button, monsters rising from the floor, the hippie bus. |
+| Day 6      | v16, [`ff88425`]                  | [#27]                                    | The original's weighted spinner, Autopilot, haunted gates.                      |
+| Day 7      | v17–v18, [`ff6dda9`], [`b1fc5e0`] | [#29], [#31]                             | Arrival and departure cutscenes, the Hall of Fame, rescues, the Bazooka.        |
+| Day 8      | v19, [`06749f5`]                  | [#33]                                    | The van bay, a log cabin, a sunken road, four cutscenes.                        |
+| Days 8–10  | v20–v23, [`1389669`]              | [#38], [#40], [#42], [#44]               | Roster hearts, a last stand, mood-matched music, discs on every hidden cell.    |
+| Days 11–12 | v24–v25, [`0d1ae73`]              | [#48], [#50]                             | The rulebook map, a Blender gravel road, clean music handoffs.                  |
+| Days 12–16 | v26, [`84bd0de`]                  | [#52], [#56], [#60], [#64], [#66], [#68] | Smarter bots, a smooth entrance, a scene for every fall, an aerodynamic van.    |
+| Day 17     | v27, [`06dba2a`]                  | [#70]                                    | IDDQD and IDKFA, a winged Warden, checkmarks for survivors who reach the van.   |
+| Day 18     | v28, [`0504769`]                  | [#72]                                    | No cheated games in the Hall of Fame, readable supplies, a Warden that walks.   |
+| Day 19     | v28.1, [`f2f6e31`]                | [#78]                                    | A sports kit for the van: a GT wing, carbon aero and stripes from nose to tail. |
 
 ## Hour 0 — Lastlight House
 
@@ -76,7 +77,7 @@ The brief: a frightening, decaying wooden house with natural green grass, a scar
 
 Snapshot [`7439b82`] · [#11] and [#13], promoted in [#12].
 
-Every figure was rebuilt in Blender: five adult survivors with 12,600–13,600-vertex heads, baked face textures, styled hair and role props (a blade, a carbine, a first-aid case, a riot shield), and four new monsters — a hound, a crawler, the Warden and a Shambler. The exported kit weighed 27.4 MB, over Cloudflare's 25 MiB per-file limit, so it was mesh-quantized to 18.9 MB. On the landing page the survivors now wait on the porch.
+Every figure was rebuilt in Blender: five adult survivors with 12,600–13,600-vertex heads, baked face textures, styled hair and role props (a blade, a carbine, a first-aid case, a riot shield), and four new monsters — a hound, a crawler, the Warden and a Shambler. The exported kit weighed 27.4 MB, over Cloudflare's 25 MiB per-file limit, so [#11] mesh-quantized it to 18.9 MB; with [#13]'s refined cast the shipped kit reached 25.5 MB, still under the limit. On the landing page the survivors now wait on the porch.
 
 ![The timber house at night with the Blender survivors sitting on the porch and the corrected ZOMBIES in da HOUSE wordmark](../assets/zombies-history/05-blender-cast-landing.jpg)
 
@@ -144,8 +145,8 @@ Four releases in 33 hours:
 
 - **v20:** Board up, Break and Grenade became compact buttons beside **End turn**, and a rules check confirmed that the medkit has no health cap, as in the rulebook.
 - **v21:** one heart per health point in the roster, a last-stand cutscene when the final survivor falls, and a haunted score with sound switches.
-- **v22:** cutscene music matched to the mood, every seat moves on turn 1, and every hidden marker is visible.
-- **v23:** a disc on every hidden cell (an audit found that furnished cells had none), a bazooka sling, barricades at any time, and a landing theme.
+- **v22:** cutscene music matched to the mood, every seat can move on turn 1, and every hidden marker is visible.
+- **v23:** a disc on every hidden cell (an audit found that furnished cells had none), a bazooka sling, barricades at any point of your own turn, and a landing theme.
 
 The landing page barely changed in these days; see the contact sheet above.
 
@@ -188,7 +189,7 @@ Old-school cheats arrived. Type `iddqd` and your survivor can no longer die: the
   <img src="../assets/zombies-history/15-v27-idkfa.jpg" width="49%" alt="v27 board after IDDQD and IDKFA: undiscovered monsters and items as pale ghosts, supplies as flat slabs, and a golden infinity sign in place of hearts">
 </p>
 
-## Day 18 — v28: today
+## Day 18 — v28: a Warden that walks
 
 Snapshot [`0504769`] · [#72], promoted in [#73].
 
@@ -199,7 +200,18 @@ Games played with a cheat no longer enter the Hall of Fame. The supplies were re
   <img src="../assets/zombies-history/16-v28-idkfa.jpg" width="49%" alt="v28 board after IDDQD and IDKFA: readable plank barricades, a jerry can and a key among the ghosts, and the winged Warden's ghost in the yard">
 </p>
 
-![The setup screen today: the Your place in the story panel with five Blender survivors, bot companions and rescued friends, beside the porch and the winged Warden](../assets/zombies-history/16-v28-setup.jpg)
+![The v28 setup screen: the Your place in the story panel with five Blender survivors, bot companions and rescued friends, beside the porch and the winged Warden](../assets/zombies-history/16-v28-setup.jpg)
+
+## Day 19 — v28.1: the sports kit
+
+Snapshot [`f2f6e31`] · [#78], promoted in [#79].
+
+A day later the one-box van got a sports kit from the same Blender script: a cream GT wing with stripes, on raked carbon pylons between flat carbon endplates, with a Gurney flap and a third brake lamp; a carbon splitter edged in sunset orange, an air dam, side skirts, a five-fin diffuser, and stripes from nose to tail. The body, wheels and outline did not change, so the van parks, drives and takes on survivors exactly as before.
+
+<p>
+  <img src="../assets/zombies-history/19-v28-1-landing.jpg" width="49%" alt="v28.1 landing page: the striped sports van parked beside the porch, the winged Warden on the right">
+  <img src="../assets/zombies-history/19-v28-1-arrival.jpg" width="49%" alt="v28.1 arrival cutscene: the sports van in profile with its GT wing above the tail, a zombie lurking behind it">
+</p>
 
 ## The Warden and the van
 
@@ -214,39 +226,40 @@ The Warden has had eight looks. After its Blender rebuild on day 4 it stayed the
 | When    | What changed                                                                                                                                                                       | Source      |
 | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
 | Hour 0  | A blocky antlered figure on a round plinth.                                                                                                                                        | [`f6e57cf`] |
-| Hour 7  | The first model kit: a rounded body, glowing eyes and branching antlers.                                                                                                           | [#3]        |
+| Hour 7  | The moonlit model kit: a rounded body, glowing eyes and branching antlers.                                                                                                         | [#3]        |
 | Hour 16 | A dark open mouth and loose slats hanging over its chest.                                                                                                                          | [#7]        |
-| Day 3   | A gaunt, horned figure with a skull face, now rigged.                                                                                                                              | [#9]        |
+| Day 3   | A gaunt, horned figure with a skull face and a newly jointed head.                                                                                                                 | [#9]        |
 | Day 4   | Rebuilt in Blender as a timber giant of roots and splinters, with antlers, an ember heart and teeth.                                                                               | [#11]       |
-| Day 14  | The many-eyed giant from [`warden_model.py`](https://github.com/vasilyevstan/zombie-boardgame/blob/c3f83dfe1933907dfdd4d215843e90a2e0eaf041/assets/blender/warden_model.py): nine eyes, a needle maw, ribs, overlong clawed arms, a shroud, a shackle and a chain.             | [#56]       |
-| Day 17  | v27: vampire wings that stir with each breath and unfurl every few seconds.                                                                                                        | [#70]       |
+| Day 14  | The many-eyed giant from [`warden_model.py`](https://github.com/vasilyevstan/zombie-boardgame/blob/41c25ef8205b60cef4e835c15a7ffed2303b5794/assets/blender/warden_model.py): nine eyes, a needle maw, ribs, overlong clawed arms, a shroud, a shackle and a chain.             | [#56]       |
+| Day 17  | v27: vampire wings that stir with each breath and flare forward every few seconds.                                                                                                 | [#70]       |
 | Day 18  | v28, 22 hours later: an armature lets it knuckle-walk, using its arms as front legs with planted claws, in the woods, on the board and in cutscenes. The tile shows it mid-stride. | [#72]       |
 
 ### The van
 
-The van has had seven bodies. The blue van of hour 7 lasted about five days. The hippie bus that replaced it got sportier twice on day 7, sixteen hours apart, and on day 16 a Blender script rebuilt it twice, twelve hours apart. It has not changed since.
+The van has had eight looks. The blue van of hour 7 lasted about five days. The hippie bus that replaced it got sportier twice on day 7, sixteen hours apart, and on day 16 a Blender script rebuilt it twice, twelve hours apart. Two and a half days later, on day 19, the one-box got a sports kit.
 
-![Seven studio renders of the van in two rows: a pastel box on octagonal wheels; a pale blue van with a bedroll on the roof; an orange-and-white hippie bus with flowers and a surfboard; the bus with a spoiler; the bus with an aero kit and black stripes; a rounder van with a peace sign; and a low aerodynamic one-box van](../assets/zombies-history/18-van-lineup.jpg)
+![Eight studio renders of the van in two rows of four: a pastel box on octagonal wheels; a pale blue van with a bedroll on the roof; an orange-and-white hippie bus with flowers and a surfboard; the bus with a spoiler; the bus with an aero kit and black stripes; a rounder van with a peace sign; a low aerodynamic one-box van; and the same one-box with a GT wing, a splitter and stripes from nose to tail](../assets/zombies-history/18-van-lineup.jpg)
 
-| When   | What changed                                                                                                         | Source      |
-| ------ | -------------------------------------------------------------------------------------------------------------------- | ----------- |
-| Hour 0 | A pastel box on octagonal wheels.                                                                                    | [`f6e57cf`] |
-| Hour 7 | A pale blue van with a bedroll on the roof rack, round lamps, a grille and a bumper.                                 | [#3]        |
-| Day 6  | An orange-and-white hippie getaway bus with flowers and a surfboard.                                                 | [#23]       |
-| Day 7  | v17: a spoiler, fender flares and separate wheels.                                                                   | [#29]       |
-| Day 7  | v18: an aero kit, brake calipers and rotors, an exhaust and stripes.                                                 | [#31]       |
-| Day 16 | Rebuilt from a Blender script, [`van_model.py`](https://github.com/vasilyevstan/zombie-boardgame/blob/c3f83dfe1933907dfdd4d215843e90a2e0eaf041/assets/blender/van_model.py), as a rounder van with a peace sign. | [#66]       |
-| Day 16 | An aerodynamic one-box with a teardrop body, wrap-around glass and deep-dish wheels.                                 | [#68]       |
+| When   | What changed                                                                                                                       | Source      |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| Hour 0 | A pastel box on octagonal wheels.                                                                                                  | [`f6e57cf`] |
+| Hour 7 | A pale blue van with a bedroll on the roof rack, round lamps, a grille and a bumper.                                               | [#3]        |
+| Day 6  | An orange-and-white hippie getaway bus with flowers and a surfboard.                                                               | [#23]       |
+| Day 7  | v17: a spoiler, fender flares and separate wheels.                                                                                 | [#29]       |
+| Day 7  | v18: an aero kit, brake calipers and rotors, an exhaust and stripes.                                                               | [#31]       |
+| Day 16 | Rebuilt from a Blender script, [`van_model.py`](https://github.com/vasilyevstan/zombie-boardgame/blob/41c25ef8205b60cef4e835c15a7ffed2303b5794/assets/blender/van_model.py), as a rounder van with a peace sign.               | [#66]       |
+| Day 16 | An aerodynamic one-box with a teardrop body, wrap-around glass and deep-dish wheels.                                               | [#68]       |
+| Day 19 | v28.1: a sports kit — a cream GT wing between carbon endplates, a splitter, side skirts, a diffuser and stripes from nose to tail. | [#78]       |
 
 ## Behind the scenes
 
-- After the first commit, every change went through a pull request to `dev`, then reached `main` in one of 31 promotion pull requests.
-- By day 4 ([#11]) the suite had 34 unit tests, 16 integration tests and 12 browser journeys on each transport. With v28 it has 78 unit tests, 24 integration tests and 34 browser journeys, run both on Node and on the Cloudflare Worker.
+- After the first commit, every change went through a pull request to `dev`, then reached `main` in a promotion pull request; v28.1 arrived in the 34th.
+- By day 4 ([#11]) the suite had 34 unit tests, 16 integration tests and 12 browser journeys on each transport. With v28.1 it has 78 unit tests, 24 integration tests and 34 browser journeys, run both on Node and on the Cloudflare Worker.
 - The game runs in production at <https://zombie-in-da-house.syntal.workers.dev>.
 
 ## How these pictures were made
 
-Each snapshot is the `main` merge commit named in its chapter, rebuilt from scratch for this page:
+Each snapshot is the `main` commit named in its chapter (a merge commit, except the first commit), rebuilt from scratch for this page:
 
 ```sh
 git worktree add --detach /tmp/zidh-history/wt <commit>
@@ -259,7 +272,7 @@ NODE_ENV=test TEST_GAME_SEED=17 HOST=127.0.0.1 PORT=4290 \
 - Every snapshot ran locally on Node with a fresh SQLite database and seed 17, so each build deals its own table reproducibly. The deck itself changed over time.
 - Playwright drove Chromium with hardware WebGL (ANGLE on Metal, Apple silicon) at 1440×900. It opened the landing page and started a solo game with two bot companions. The first two snapshots predate solo play, so there it set a two-player shared-device table. It captured or skipped the arrival cutscene, then waited for the board.
 - The cheat shots type `iddqd`, then `idkfa`, on the board and zoom in four steps.
-- None of the 16 builds logged a console error.
+- None of the 17 builds logged a console error.
 - Later landing pages carry a build stamp in the footer. The date of our rebuild was painted out of it, leaving the version and commit.
 - The lineups are studio renders of each version's own model file from the repository history, made with three.js r187 under one light rig and camera angle; only self-lit parts such as lamps and eyes glow. The walking Warden is posed mid-stride by the game's own gait code. They show the models, not the game's lighting.
 - Screenshots are 1200-pixel JPEGs; the contact sheet is a montage of the 16 landing pages.
@@ -274,12 +287,14 @@ NODE_ENV=test TEST_GAME_SEED=17 HOST=127.0.0.1 PORT=4290 \
 [`096a1f2`]: https://github.com/vasilyevstan/zombie-boardgame/commit/096a1f2ff6f3484760676dcb33b7acf799827d64
 [`ff88425`]: https://github.com/vasilyevstan/zombie-boardgame/commit/ff8842519b52339b42b52db8cac0ffc6313880af
 [`ff6dda9`]: https://github.com/vasilyevstan/zombie-boardgame/commit/ff6dda906ea0b5b2fdfc529c730366be4def16cb
+[`b1fc5e0`]: https://github.com/vasilyevstan/zombie-boardgame/commit/b1fc5e08831376c10190a2e111027046d35d2d1f
 [`06749f5`]: https://github.com/vasilyevstan/zombie-boardgame/commit/06749f57c85de78fbf87f82bafcc1796b8535c18
 [`1389669`]: https://github.com/vasilyevstan/zombie-boardgame/commit/1389669dee43e945e34c335b9c4b4b1241874080
 [`0d1ae73`]: https://github.com/vasilyevstan/zombie-boardgame/commit/0d1ae73dda076a87a8f4a8aa89633f9fb8ee5aef
 [`84bd0de`]: https://github.com/vasilyevstan/zombie-boardgame/commit/84bd0debf1e4707bf59cc28d0a178f7c54dc321a
 [`06dba2a`]: https://github.com/vasilyevstan/zombie-boardgame/commit/06dba2a2078f1d884ae101612b63cb9ccb7b2aa8
 [`0504769`]: https://github.com/vasilyevstan/zombie-boardgame/commit/05047697142be180f89a369ef6a999716209d4eb
+[`f2f6e31`]: https://github.com/vasilyevstan/zombie-boardgame/commit/f2f6e31e690482530d01d4fe4c2912b112691a68
 [#1]: https://github.com/vasilyevstan/zombie-boardgame/pull/1
 [#2]: https://github.com/vasilyevstan/zombie-boardgame/pull/2
 [#3]: https://github.com/vasilyevstan/zombie-boardgame/pull/3
@@ -330,5 +345,7 @@ NODE_ENV=test TEST_GAME_SEED=17 HOST=127.0.0.1 PORT=4290 \
 [#71]: https://github.com/vasilyevstan/zombie-boardgame/pull/71
 [#72]: https://github.com/vasilyevstan/zombie-boardgame/pull/72
 [#73]: https://github.com/vasilyevstan/zombie-boardgame/pull/73
+[#78]: https://github.com/vasilyevstan/zombie-boardgame/pull/78
+[#79]: https://github.com/vasilyevstan/zombie-boardgame/pull/79
 [issue #58]: https://github.com/vasilyevstan/zombie-boardgame/issues/58
 [issue #59]: https://github.com/vasilyevstan/zombie-boardgame/issues/59

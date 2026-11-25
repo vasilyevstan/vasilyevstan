@@ -205,7 +205,7 @@ game I liked. Three hours and 44 minutes later, the first playable
 multiplayer build was committed. The first cloud release followed the next
 morning. The three boards below show early milestones; the
 [illustrated game history](../projects/zombies-in-da-house-edge-multiplayer.md)
-follows sixteen snapshots through v28.
+follows the game through v28.1, including the changing Warden and van designs.
 
 | First playable build | The house moves into the woods | v19: log cabin and van bay |
 | --- | --- | --- |

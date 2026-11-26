@@ -22,8 +22,8 @@ _Personal projects; opinions are my own._ · [LinkedIn](https://www.linkedin.com
   from a pre-match prototype to live betting, reusable markets and risk controls.
 - [How Zombies in da House evolved](projects/zombies-in-da-house-edge-multiplayer.md):
   its COVID-era origins through v28.3, including the evolving Warden and van designs.
-- [Margaret: from a Blender script to a boat I could hold](articles/margaret-from-blender-to-a-printed-boat.md):
-  how I designed a model yacht with AI, printed it, and used a loose keel to improve the fit.
+- [Margaret: from an idea to a boat I can hold](articles/margaret-from-blender-to-a-printed-boat.md):
+  from AI-assisted design iterations to a 3D-printed model yacht that floats.
 - [How I ship](how-i-ship.md): the working rules I keep.
 
 ## Projects

@@ -1,27 +1,43 @@
-# Margaret: from a Blender script to a boat I could hold
+# Margaret: from an idea to a boat I can hold
 
-The keel on my 3D-printed yacht, Margaret, wobbled. It hadn't wobbled in Blender. That small difference became the most useful part of a project that started with a description of a boat and ended with a 20 cm model I could hold.
+Margaret started as a description of a boat I wanted to make. Now she is a 20 cm model yacht I can pick up, touch and put on the water. She floats.
 
-I wanted Margaret to look like a Jeanneau Sun Odyssey 43: a white cruising yacht with a blue hull below the waterline. Rather than download an existing model, I used AI tools to help write and revise a [Blender script](https://github.com/vasilyevstan/3d-design/blob/f9dbe1a14abb596827c0390c4e0ced3a755b7a0b/Margaret/scripts/build_v7.py) that built her. Keeping the design in code meant I could change the shape of the hull or the size of a joint and rebuild the parts without redrawing the boat.
+That is what makes this project exciting to me: this particular model did not exist before we started. It was not a boat file I downloaded and sent to a printer. With AI tools, I went from an idea through design iterations in Blender to a physical object.
 
-<img src="../assets/margaret/blender-viewport.png" width="520" alt="Margaret in the Blender viewport: white hull, blue keel, twin wheels and a mainsail marked MGT 43, on a display stand.">
+I wanted a white cruising yacht with a blue underwater hull, inspired by the Jeanneau Sun Odyssey 43 rather than an exact replica. AI helped write the [Blender scripts](https://github.com/vasilyevstan/3d-design/tree/5b4d8f5f82e57f1d7ad0cde46171988319d04691/Margaret/scripts) that generated the geometry. I could inspect the result, explain what I wanted to change, and rebuild it.
 
-*The Blender model. I kept the name on the bow and the sail number, but left off the lifelines: at this scale they would be just 0.1 mm thick, too fine for my printer's 0.4 mm nozzle.*
+<img src="../assets/margaret/blender-viewport.png" width="520" alt="Margaret in the Blender viewport: white hull, blue keel, twin wheels and a mainsail marked MGT 43, on a curved display stand.">
 
-## What a picture couldn't tell me
+*Margaret in Blender. This is the digital model, not a photograph of the print.*
 
-A scale copy would have put the ballast too close to the hull. I gave Margaret a deeper keel and a hollow bulb at its tip. The bottom of the bulb comes off, so I could print it empty, add weight and close it again. I sliced the parts in Bambu Studio and printed the boat on a Bambu Lab P2S.
+## It took iterations, not a single prompt
 
-<img src="../assets/margaret/ballast-bulb.png" width="600" alt="Exploded Blender render of the blue keel with its hollow lower cup removed, showing the alignment posts and ballast inside.">
+The first draft was recognisably a boat, but not yet the boat I wanted. The hull was too angular, the proportions were off, and the cabin and stern needed work. AI reviewers challenged the shape and whether it could be printed. We rebuilt the hull's curves rather than just making the render look smoother.
 
-*Exploded render of the ballast cup. The gap is there to show how the parts go together.*
+Then came the details that made her Margaret: the teak-patterned deck, twin steering wheels, hatches, an anchor, her name on the hull and **MGT 43** on the sail. The rigging became printable, and the display stand evolved from a cradle to a single curved support. Each round gave me something concrete to look at and respond to.
 
-With the print in hand, I went back to the loose keel. I asked the AI reviewers to check the joint against both the model and the paths the printer would actually follow. The fin had about 0.20 mm of clearance on each side. That sounds tiny until you remember there's a weight at the far end. The next design halved the clearance to 0.10 mm per side. Changing the socket in the lower hull let me keep the fin, rudder and upper hull I'd already printed.
+| Earlier published model | Later refinement |
+| --- | --- |
+| <img src="../assets/margaret/iteration-early.png" width="360" alt="Earlier Margaret render with an unmarked sail and a two-support cradle stand."> | <img src="../assets/margaret/iteration-refined.png" width="360" alt="Later Margaret render with MGT 43 sail markings, navy rigging and a single curved stand."> |
 
-<img src="../assets/margaret/assembly-fits.png" width="600" alt="Cross-section diagram of the rudder, keel fin and ballast cup, with the original fits above and revised fits below.">
+*Actual repository renders from [v7f](https://github.com/vasilyevstan/3d-design/tree/7372723ee29ea13ddb350574227c45bceb32bcb3/Margaret) and [v7l](https://github.com/vasilyevstan/3d-design/tree/5b4d8f5f82e57f1d7ad0cde46171988319d04691/Margaret). These show later refinements, not the first draft.*
 
-*The middle column shows the change: the green fin stays the same; the blue socket gets narrower. These are design dimensions, not measurements of a second print.*
+## From the screen to the printer
 
-What I'd repeat on another project is that last loop. AI helped me turn an idea into geometry I could edit. Holding the print told me which edit was worth making.
+A detailed model still had to become printable parts. We worked out how to split and orient them, which details would survive at this scale, and how to use four filament colours for the white hull, blue bottom, navy trim and teak-coloured deck. Some details stayed out: scale lifelines would have been thinner than the printer could reproduce.
 
-[Explore the model and printable files](https://github.com/vasilyevstan/3d-design/tree/main/Margaret) · [Read the assembly-fit review](https://github.com/vasilyevstan/3d-design/blob/f9dbe1a14abb596827c0390c4e0ced3a755b7a0b/Margaret/REVIEW.md#step-14--assembly-fits-measured-on-the-toolpaths-v7k)
+I used Bambu Studio to prepare the parts and a Bambu Lab P2S to print the boat. The design was no longer something I could only rotate on a screen. It had physical shape, weight and texture.
+
+<img src="../assets/margaret/cockpit-detail.png" width="680" alt="Blender close-up of Margaret's cockpit, showing twin steering wheels, teak-patterned seating and deck details.">
+
+*A render of the cockpit details we developed through the iterations. The pictures on this page document the design; they are not photographs of the printed boat.*
+
+## More than a display model
+
+I wanted Margaret to float, not just look like a yacht on a stand. That changed the design: a deeper keel holds ballast low down, and its hollow bulb can be filled after printing. There are interchangeable paper sails for use on the water and an optional printed sail for display.
+
+The [repository documents the weight and buoyancy calculations](https://github.com/vasilyevstan/3d-design/blob/5b4d8f5f82e57f1d7ad0cde46171988319d04691/Margaret/README.md). Those are design predictions, not measured sailing performance. The physical boat floats; how she handles different sails and wind conditions is a separate question.
+
+For me, the lesson is that AI-assisted creation does not have to end with software or a picture. I still had to choose, inspect and refine, but AI helped turn those decisions into a model I could manufacture. Something that began as an idea is now a boat I can hold.
+
+The project is open: [explore Margaret's Blender model, printable files and sail templates](https://github.com/vasilyevstan/3d-design/tree/main/Margaret), or follow the decisions in the [design iteration log](https://github.com/vasilyevstan/3d-design/blob/5b4d8f5f82e57f1d7ad0cde46171988319d04691/Margaret/REVIEW.md).
